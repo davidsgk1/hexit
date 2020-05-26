@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.picker.fragment.CirclePickerFragment">
+
+    <com.skydoves.colorpickerview.ColorPickerView
+        android:id="@+id/color_picker_view"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="@dimen/standard_spacing_omg"
+        app:actionMode="always"
+        app:alpha_flag="0.9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:palette="@drawable/palette"
+        app:selector="@drawable/wheel">
+
+    </com.skydoves.colorpickerview.ColorPickerView>
+
+    <LinearLayout
+        android:id="@+id/found_color_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/color_found_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color_picker_view" />
+
+    <TextView
+        android:id="@+id/color_found_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/color_label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/found_color_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

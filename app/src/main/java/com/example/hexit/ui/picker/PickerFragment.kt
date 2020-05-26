@@ -4,43 +4,57 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.hexit.R
-import com.skydoves.colorpickerview.ColorPickerView
-import com.skydoves.colorpickerview.listeners.ColorListener
+import com.example.hexit.ui.picker.adapter.PickerCollectionAdapter
+import com.example.hexit.ui.picker.adapter.PickerCollectionAdapter.Companion.BAR_SLIDER_TITLE
+import com.example.hexit.ui.picker.adapter.PickerCollectionAdapter.Companion.CIRCLE_PICKER_TITLE
+import com.example.hexit.ui.picker.adapter.PickerCollectionAdapter.Companion.CUSTOM_IMAGE_TITLE
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
-class PickerFragment : Fragment(), ColorListener {
+class PickerFragment : Fragment() {
 
-    private lateinit var pickerPresenter: PickerPresenter
-    private lateinit var colorPickerView: ColorPickerView
-    private lateinit var colorDisplay: LinearLayout
-    private lateinit var colorLabel: TextView
+    private lateinit var pickerCollectionAdapter: PickerCollectionAdapter
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        pickerPresenter =
-            ViewModelProviders.of(this).get(PickerPresenter::class.java)
-        val root = inflater.inflate(R.layout.fragment_picker, container, false)
-        setUpViews(root)
-        colorPickerView.colorListener = this
-        return root
+        return inflater.inflate(R.layout.fragment_picker, container, false)
     }
 
-    override fun onColorSelected(color: Int, fromUser: Boolean) {
-        colorDisplay.setBackgroundColor(color)
-        colorLabel.text = Integer.toHexString(color)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        pickerCollectionAdapter = PickerCollectionAdapter(this)
+        viewPager = view.findViewById(R.id.pager)
+        viewPager.adapter = pickerCollectionAdapter
+        viewPager.reduceDragSensitivity()
+        val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = findTabTitleByPosition(position)
+        }.attach()
     }
 
-    private fun setUpViews(root: View) = with(root) {
-        colorPickerView = findViewById(R.id.color_picker_view)
-        colorDisplay = findViewById(R.id.found_color_view)
-        colorLabel = findViewById(R.id.color_found_label)
+    private fun findTabTitleByPosition(position: Int) = when (position) {
+        0 -> CIRCLE_PICKER_TITLE
+        1 -> BAR_SLIDER_TITLE
+        2 -> CUSTOM_IMAGE_TITLE
+        else -> "Error Finding Page!"
+    }
+
+    private fun ViewPager2.reduceDragSensitivity() {
+        val recyclerViewField = ViewPager2::class.java.getDeclaredField("mRecyclerView")
+        recyclerViewField.isAccessible = true
+        val recyclerView = recyclerViewField.get(this) as RecyclerView
+
+        val touchSlopField = RecyclerView::class.java.getDeclaredField("mTouchSlop")
+        touchSlopField.isAccessible = true
+        val touchSlop = touchSlopField.get(recyclerView) as Int
+        touchSlopField.set(recyclerView, touchSlop * 12)
     }
 }

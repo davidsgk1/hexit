@@ -7,6 +7,7 @@
     tools:context=".ui.picker.fragment.BarSliderFragment">
 
     <TextView
+        android:id="@+id/bar_slider_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bar Slider Upload"
@@ -14,5 +15,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.
+        android:id="@+id/slider_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_weight="1"
+        android:stepSize="1"
+        android:valueFrom="0"
+        android:valueTo="11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bar_slider_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

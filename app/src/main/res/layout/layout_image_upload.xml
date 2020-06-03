@@ -6,13 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".ui.picker.fragment.ImageUploadFragment">
 
-    <TextView
+    <com.skydoves.colorpickerview.ColorPickerView
+        android:id="@+id/custom_image_color_picker"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="@dimen/standard_spacing_omg"
+        app:actionMode="always"
+        app:alpha_flag="0.9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:palette="@drawable/image_upload_no_image_bg"
+        app:selector="@drawable/wheel" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_custom_image_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Custom Image Upload"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/custom_image_add_button_accessibility"
+        app:layout_constraintBottom_toBottomOf="@id/custom_image_color_picker"
+        app:layout_constraintLeft_toLeftOf="@id/custom_image_color_picker"
+        app:layout_constraintRight_toRightOf="@id/custom_image_color_picker"
+        app:layout_constraintTop_toTopOf="@id/custom_image_color_picker"
+        app:srcCompat="@drawable/ic_add_black_24dp" />
+
+    <LinearLayout
+        android:id="@+id/found_color_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/color_found_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/custom_image_color_picker" />
+
+    <TextView
+        android:id="@+id/color_found_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/color_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/found_color_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

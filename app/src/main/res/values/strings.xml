@@ -5,4 +5,8 @@
 
     <!-- Color Picker Strings -->
     <string name="color_label">Found Color</string>
+
+    <!-- Custom Image Strings -->
+    <string name="custom_image_background_accessibility">Custom image upload placeholder</string>
+    <string name="custom_image_add_button_accessibility">Upload image</string>
 </resources>

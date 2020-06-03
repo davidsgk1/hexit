@@ -29,6 +29,7 @@ class CirclePickerFragment : Fragment(), ColorListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
     }
 
     override fun onColorSelected(color: Int, fromUser: Boolean) {

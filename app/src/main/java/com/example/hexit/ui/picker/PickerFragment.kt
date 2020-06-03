@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.hexit.R
 import com.example.hexit.ui.picker.adapter.PickerCollectionAdapter
-import com.example.hexit.ui.picker.adapter.PickerCollectionAdapter.Companion.BAR_SLIDER_TITLE
 import com.example.hexit.ui.picker.adapter.PickerCollectionAdapter.Companion.CIRCLE_PICKER_TITLE
 import com.example.hexit.ui.picker.adapter.PickerCollectionAdapter.Companion.CUSTOM_IMAGE_TITLE
 import com.google.android.material.tabs.TabLayout
@@ -42,8 +41,7 @@ class PickerFragment : Fragment() {
 
     private fun findTabTitleByPosition(position: Int) = when (position) {
         0 -> CIRCLE_PICKER_TITLE
-        1 -> BAR_SLIDER_TITLE
-        2 -> CUSTOM_IMAGE_TITLE
+        1 -> CUSTOM_IMAGE_TITLE
         else -> "Error Finding Page!"
     }
 
